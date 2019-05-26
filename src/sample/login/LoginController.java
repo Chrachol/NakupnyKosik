@@ -9,6 +9,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import org.apache.commons.codec.digest.DigestUtils;
 import sample.Controller;
 import sample.User;
 import sample.connectivity.ConnectionClass;
@@ -24,9 +25,9 @@ import java.sql.ResultSet;
 import java.util.Base64;
 
 public class LoginController extends Controller {
-    private static final String encryptionKey           = "ABCDEFGHIJKLMNOP";
-    private static final String characterEncoding       = "UTF-8";
-    private static final String cipherTransformation    = "AES/CBC/PKCS5PADDING";
+    private static final String encryptionKey = "ABCDEFGHIJKLMNOP";
+    private static final String characterEncoding = "UTF-8";
+    private static final String cipherTransformation = "AES/CBC/PKCS5PADDING";
     private static final String aesEncryptionAlgorithem = "AES";
 
     @FXML
@@ -58,16 +59,16 @@ public class LoginController extends Controller {
 
 
     @FXML
-    public void login(){
-        try{
+    public void login() {
+        try {
             BufferedReader br = new BufferedReader(new FileReader("RegistrationFile"));
             String line = br.readLine();
             boolean wrUser = false;
-            while(line != null){
-                String []udaje = line.split(";");
-                if (udaje[0].equals(lLoginName.getText())&&udaje[2].equals(encrypt(lLoginPassword.getText()))){
+            while (line != null) {
+                String[] udaje = line.split(";");
+                if (udaje[0].equals(lLoginName.getText()) && udaje[2].equals(DigestUtils.sha1Hex(lLoginPassword.getText()))) {
                     wrUser = true;
-                    User user = new User(lLoginName.getText(),udaje[1],lLoginPassword.getText());
+                    User user = new User(lLoginName.getText(), udaje[1], lLoginPassword.getText());
                     br.close();
                     try {
 
@@ -82,7 +83,7 @@ public class LoginController extends Controller {
                         stage.setResizable(true);
                         stage.show();
 
-                    }catch(IOException e){
+                    } catch (IOException e) {
                         e.printStackTrace();
                         System.out.println("Nepodarilo sa otvorit scenu!!");
                     }
@@ -90,23 +91,23 @@ public class LoginController extends Controller {
                 }
                 line = br.readLine();
             }
-            if(!wrUser) {
+            if (!wrUser) {
                 System.out.println("Uzivatel sa nenasiel.");
             }
 
             br.close();
-        }catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
 
     }
 
     @FXML
-    public  void register(){
+    public void register() {
         try {
             BufferedWriter bw = new BufferedWriter(new FileWriter("RegistrationFile", true));
-            String addUser = (lRegisterName.getText().trim() + ";" + lRegisterEmail.getText().trim() + ";" + encrypt(lRegisterPassword1.getText().trim()));
-            User user = new User(lRegisterName.getText().trim(),lRegisterEmail.getText().trim(),lRegisterPassword1.getText().trim());
+            String addUser = (lRegisterName.getText().trim() + ";" + lRegisterEmail.getText().trim() + ";" + DigestUtils.sha1Hex(lRegisterPassword1.getText().trim()));
+            User user = new User(lRegisterName.getText().trim(), lRegisterEmail.getText().trim(), lRegisterPassword1.getText().trim());
             bw.write(addUser);
             bw.newLine();
             bw.close();
@@ -122,34 +123,15 @@ public class LoginController extends Controller {
                 stage.setScene(new Scene(root, 720, 460));
                 stage.setResizable(true);
                 stage.show();
-            }catch(IOException e){
+            } catch (IOException e) {
                 e.printStackTrace();
                 System.out.println("Nepodarilo sa otvorit scenu!!");
             }
 
-        }catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
 
-        }
-
-    private String encrypt(String password){
-        String encryptedText = "";
-        try {
-            Cipher cipher   = Cipher.getInstance(cipherTransformation);
-            byte[] key      = encryptionKey.getBytes(characterEncoding);
-            SecretKeySpec secretKey = new SecretKeySpec(key, aesEncryptionAlgorithem);
-            IvParameterSpec ivparameterspec = new IvParameterSpec(key);
-            cipher.init(Cipher.ENCRYPT_MODE, secretKey, ivparameterspec);
-            byte[] cipherText = cipher.doFinal(password.getBytes("UTF8"));
-            Base64.Encoder encoder = Base64.getEncoder();
-            encryptedText = encoder.encodeToString(cipherText);
-            System.out.println(encryptedText);
-
-        } catch (Exception E) {
-            System.err.println("Encrypt Exception : "+E.getMessage());
-        }
-        return encryptedText;
     }
 
 }
