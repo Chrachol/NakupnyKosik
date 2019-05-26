@@ -65,7 +65,7 @@ public class LoginController extends Controller {
             boolean wrUser = false;
             while(line != null){
                 String []udaje = line.split(";");
-                if (udaje[0].equals(lLoginName.getText())&&decrypt(udaje[2]).equals(lLoginPassword.getText())){
+                if (udaje[0].equals(lLoginName.getText())&&udaje[2].equals(encrypt(lLoginPassword.getText()))){
                     wrUser = true;
                     User user = new User(lLoginName.getText(),udaje[1],lLoginPassword.getText());
                     br.close();
@@ -151,23 +151,7 @@ public class LoginController extends Controller {
         }
         return encryptedText;
     }
-    private String decrypt(String password) {
-        String decryptedText = "";
-        try {
-            Cipher cipher = Cipher.getInstance(cipherTransformation);
-            byte[] key = encryptionKey.getBytes(characterEncoding);
-            SecretKeySpec secretKey = new SecretKeySpec(key, aesEncryptionAlgorithem);
-            IvParameterSpec ivparameterspec = new IvParameterSpec(key);
-            cipher.init(Cipher.DECRYPT_MODE, secretKey, ivparameterspec);
-            Base64.Decoder decoder = Base64.getDecoder();
-            byte[] cipherText = decoder.decode(password.getBytes("UTF8"));
-            decryptedText = new String(cipher.doFinal(cipherText), "UTF-8");
 
-        } catch (Exception E) {
-            System.err.println("decrypt Exception : "+E.getMessage());
-        }
-        return decryptedText;
-    }
 }
 
 
