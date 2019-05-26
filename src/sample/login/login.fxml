@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Glow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="root" fx:id="PPPpane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="794.0" prefWidth="1087.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.login.LoginController">
+   <children>
+      <TextField id="name" fx:id="lRegisterName" layoutX="648.0" layoutY="180.0" prefHeight="47.0" prefWidth="339.0" AnchorPane.rightAnchor="100.0" />
+      <Pane id="Log_right" prefHeight="794.0" prefWidth="545.0" stylesheets="@style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Text id="h1_Log_b" fill="WHITE" layoutX="120.0" layoutY="85.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Vitajte späť" textAlignment="CENTER" wrappingWidth="304.3775634765625" />
+            <Text id="h2_name" fill="WHITE" layoutX="85.0" layoutY="283.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Meno :" />
+            <Text id="h2_name" fill="WHITE" layoutX="85.0" layoutY="403.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Heslo :" />
+            <TextField id="name" fx:id="lLoginName" layoutX="120.0" layoutY="289.0" prefHeight="47.0" prefWidth="339.0" />
+            <Text fx:id="lWarrning" fill="RED" layoutX="262.0" layoutY="720.0" strokeType="OUTSIDE" strokeWidth="0.0" />
+            <Button id="Log_btn" layoutX="120.0" layoutY="599.0" mnemonicParsing="false" onAction="#login" prefHeight="60.0" prefWidth="304.0" style="-fx-background-color: none; -fx-border-color: white; -fx-border-radius: 3px;" text="PRIHLÁSIŤ" textFill="WHITE">
+               <effect>
+                  <Glow level="0.0" />
+               </effect></Button>
+            <Text id="p" fill="WHITE" layoutX="111.0" layoutY="150.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Vitajte späť ,sme radi ,že ste tu." textAlignment="CENTER" wrappingWidth="321.9999936185777" />
+            <PasswordField id="name" fx:id="lLoginPassword" layoutX="120.0" layoutY="415.0" onAction="#login" prefHeight="47.0" prefWidth="339.0" />
+         </children>
+      </Pane>
+      <TextField id="name" fx:id="lRegisterEmail" layoutX="647.0" layoutY="298.0" prefHeight="47.0" prefWidth="339.0" AnchorPane.rightAnchor="101.0" />
+      <Text id="h2_name" fill="#749a81" layoutX="612.0" layoutY="382.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Heslo :" AnchorPane.leftAnchor="618.0" AnchorPane.rightAnchor="370.0" />
+      <Text id="h2_name" fill="#749a81" layoutX="618.0" layoutY="174.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Meno :" AnchorPane.leftAnchor="618.0" AnchorPane.rightAnchor="398.53369140625" />
+      <Text id="h2_name" fill="#749a81" layoutX="618.0" layoutY="490.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Zopakuj heslo :" AnchorPane.leftAnchor="618.0" AnchorPane.rightAnchor="288.219970703125" />
+      <Text id="h2_name" fill="#749a81" layoutX="618.0" layoutY="276.0" strokeType="OUTSIDE" strokeWidth="0.0" text="E-mail :" AnchorPane.leftAnchor="618.0" />
+      <Button id="Log_sign" layoutX="671.0" layoutY="597.0" mnemonicParsing="false" onAction="#register" prefHeight="60.0" prefWidth="304.0" text="REGISTROVAŤ" textFill="WHITE" AnchorPane.bottomAnchor="137.0" AnchorPane.rightAnchor="112.0" />
+      <Text id="h1_Log_b" cache="true" fill="#749a81" layoutX="665.0" layoutY="93.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Registrácia" textAlignment="CENTER" wrappingWidth="304.3775634765625" AnchorPane.rightAnchor="117.6224365234375" AnchorPane.topAnchor="44.4404296875" />
+      <Text fx:id="lWarrningRegister" fill="RED" layoutX="803.0" layoutY="713.0" strokeType="OUTSIDE" strokeWidth="0.0" />
+      <PasswordField id="name" fx:id="lRegisterPassword1" layoutX="648.0" layoutY="401.0" prefHeight="47.0" prefWidth="339.0" AnchorPane.rightAnchor="100.0" />
+      <PasswordField id="name" fx:id="lRegisterPassword2" layoutX="647.0" layoutY="510.0" onAction="#register" prefHeight="47.0" prefWidth="339.0" AnchorPane.rightAnchor="101.0" />
+   </children>
+</AnchorPane>

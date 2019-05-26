@@ -1,0 +1,32 @@
+.root{
+    -fx-background-color: white;
+}
+#Log_right {
+    -fx-background-color: #749A81;
+}
+#h1_Log_b {
+    -fx-font-size: 300%;
+}
+#p {
+    -fx-font-size: 120%;
+}
+#h2_name {
+    -fx-font-size: 150%;
+}
+#name {
+    -fx-background-color: none;
+    -fx-border-color: #000;
+    -fx-border-width: 0 0 1px 0;
+}
+#Log_btn {
+    -fx-font-size: 120%;
+    -fx-background-color: #fff;
+}
+#Log_sign {
+    -fx-font-size: 120%;
+    -fx-background-color: #749A81;
+}
+#lv {
+    -fx-font-size: 150%;
+
+}
