@@ -66,7 +66,7 @@ public class LoginController extends Controller {
             boolean wrUser = false;
             while (line != null) {
                 String[] udaje = line.split(";");
-                if (udaje[0].equals(lLoginName.getText()) && udaje[2].equals(DigestUtils.sha1Hex(lLoginPassword.getText()))) {
+                if (udaje[0].equals(lLoginName.getText()) && udaje[2].equals(encrypt(lLoginPassword.getText()))) {
                     wrUser = true;
                     User user = new User(lLoginName.getText(), udaje[1], lLoginPassword.getText());
                     br.close();
@@ -106,7 +106,7 @@ public class LoginController extends Controller {
     public void register() {
         try {
             BufferedWriter bw = new BufferedWriter(new FileWriter("RegistrationFile", true));
-            String addUser = (lRegisterName.getText().trim() + ";" + lRegisterEmail.getText().trim() + ";" + DigestUtils.sha1Hex(lRegisterPassword1.getText().trim()));
+            String addUser = (lRegisterName.getText().trim() + ";" + lRegisterEmail.getText().trim() + ";" + encrypt(lRegisterPassword1.getText().trim()));
             User user = new User(lRegisterName.getText().trim(), lRegisterEmail.getText().trim(), lRegisterPassword1.getText().trim());
             bw.write(addUser);
             bw.newLine();
@@ -132,6 +132,9 @@ public class LoginController extends Controller {
             e.printStackTrace();
         }
 
+    }
+    private String encrypt(String pass){
+        return DigestUtils.sha512Hex(pass);
     }
 
 }
