@@ -16,7 +16,8 @@ import java.net.URL;
 import java.util.*;
 
 public class VytvaranieKosikaController implements Initializable {
-
+    @FXML
+    private ChoiceBox<String> choiceBox;
     @FXML
     private TextField tf_MenoKosika;
 
@@ -767,6 +768,7 @@ public class VytvaranieKosikaController implements Initializable {
     private boolean mazem=false;
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        choiceBox.getItems();
         lv_Polozky.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {

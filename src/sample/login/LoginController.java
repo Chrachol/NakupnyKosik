@@ -133,7 +133,7 @@ public class LoginController extends Controller {
         }
 
     }
-    private String encrypt(String pass){
+    public String encrypt(String pass){
         return DigestUtils.sha512Hex(pass);
     }
 
